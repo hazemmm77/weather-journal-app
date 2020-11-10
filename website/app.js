@@ -1,31 +1,76 @@
 /* Global Variables */
-const apiKey = ' gb&APPID =03cd3f71e1c9a821467394a03f4b9644'
-const baseURL='https://api.openweathermap.org/data/2.5/weather?zip='
+const apiKey = '&units=imperials&appid=03cd3f71e1c9a821467394a03f4b9644'
+const baseURL='http://api.openweathermap.org/data/2.5/weather?q='
+// Create a new date instance dynamically with JS
+let d = new Date();
+let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+
+var City ;
+
+//let d = new Date();
+//let url=`http://api.openweathermap.org/data/2.5/weather?q=${City}&units=imperials&appid=03cd3f71e1c9a821467394a03f4b9644`
+//let url ="http://api.openweathermap.org/data/2.5/weather?id=4566966&APPID=bd7c9be239bc196112dd11ef3bbb4cdf"
+
+
 
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e){
-     const zip=document.getElementById("zip").value;
-     alert(baseURL+zip+apiKey);
-     getData(baseURL,zip, apiKey)
-     alert('hiiiiiiiiii')
-     alert(zip);
-}
-const getData = async (baseURL, zip, key)=>{
-        console.log(baseURL+zip+key);
-         const res = await fetch(baseURL+zip+key)
+  City=document.getElementById("City").value;
 
-          try {
-                   const data = await res.json();
-                  console.log(data)
-                 return data;
-             }
-             catch(error) {
-              console.log("error", error);
-    // appropriately handle the error
+const feelings =document.getElementById("feelings").value;
+
+    getData(baseURL+City+apiKey)
+    .then(function(data){
+
+    var obj = JSON.parse{temp:data.main.temp,date:newDate,feeling:feelings})
+    console.log(obj);
+     postData('/',obj); // TEMP: , date: Data.date,feeling:feeling} );
+
+    });
+
+}
+const getData = async (url)=>
+{
+
+         const data = await fetch(url)
+                   try {
+                        const res = await data.json();
+
+                        return res;
+                        }
+          catch(error) {   // appropriately handle the error
+                        console.log("error", error);
+                      }
+
+
+}
+const postData = async ( url = '', data = {})=>
+{
+
+    const response = await fetch(url,
+  {
+    method: 'POST',
+    credentials:'same-origin',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+
+
+  });
+  try {
+    const newData=await response.json();
+    console.log("new data"+newData);
+    return newData;
+
+      }
+  catch (error)
+  {
+        console.log(error);
+
   }
 }
-
 
 // Create a new date instance dynamically with JS
 //let d = new Date();
