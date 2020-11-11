@@ -20,23 +20,24 @@ function performAction(e){
 
 const feelings =document.getElementById("feelings").value;
 
-    getData(baseURL+City+apiKey)
+    getWeather(baseURL+City+apiKey)
     .then(function(data){
-
-    var obj = JSON.parse{temp:data.main.temp,date:newDate,feeling:feelings})
-    console.log(obj);
-     postData('/',obj); // TEMP: , date: Data.date,feeling:feeling} );
+  var obj = {temp:data.main.temp,
+      date:newDate,
+      feeling:feelings};
+  //  obj= JSON.stringify(obj);
+ postData('/api/',obj);
 
     });
 
 }
-const getData = async (url)=>
+const getWeather = async (url)=>
 {
 
          const data = await fetch(url)
                    try {
                         const res = await data.json();
-
+                         console.log(res);
                         return res;
                         }
           catch(error) {   // appropriately handle the error
@@ -45,32 +46,31 @@ const getData = async (url)=>
 
 
 }
-const postData = async ( url = '', data = {})=>
+const postData = async ( url = ' ', data = {})=>
 {
+         console.log(data);
 
-    const response = await fetch(url,
-  {
-    method: 'POST',
-    credentials:'same-origin',
+    const response = await fetch(url,{
+    method: "POST",
+    credentials:"same-origin",
     headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+});
 
+    //  try {
+            // const newData=await response.text();
+             //console.log("new data"+newData);
+             //return newData;
 
-  });
-  try {
-    const newData=await response.json();
-    console.log("new data"+newData);
-    return newData;
+            // }
+     //catch (error)
+      //     {
+        //console.log(error);
 
-      }
-  catch (error)
-  {
-        console.log(error);
-
-  }
-}
+  //    }
+};
 
 // Create a new date instance dynamically with JS
 //let d = new Date();

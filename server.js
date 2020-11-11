@@ -25,8 +25,9 @@ app.get('/', (req, res) => {
   response.send(projectData);
 
 });
-app.post('/',(req,res)=>{
+app.post('/api/',(req,res)=>{
   let data = request.body;
+console.log(data);
  projectData["temp"] = data.temp;
  projectData["feel"] = data.feeling;
  projectData["date"] = data.date;
