@@ -3,6 +3,7 @@ projectData = {};
 // Express to run server and routes
 const express = require('express');
 
+
 // Start up an instance of app
 const app = express();
 
@@ -25,13 +26,13 @@ app.get('/', (req, res) => {
   response.send(projectData);
 
 });
-app.post('/api/',(req,res)=>{
-  let data = request.body;
+app.post('/add',(req,res)=>{
+  let data = req.body;
 console.log(data);
  projectData["temp"] = data.temp;
  projectData["feel"] = data.feeling;
  projectData["date"] = data.date;
- response.send(projectData);
+ res.send(projectData);
 
 
 });
@@ -43,6 +44,12 @@ app.listen(port, () => {
 
 // Initialize all route with a callback function
 
-// Callback function to complete GET '/all'
+//Callback function to complete GET '/all'
+app.get('/all',getData)
+function getData(req,res)
+{
+  res.send(projectData);
+
+}
 
 // Post Route
