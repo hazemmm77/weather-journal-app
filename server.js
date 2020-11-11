@@ -30,7 +30,7 @@ app.post('/add',(req,res)=>{
   let data = req.body;
 console.log(data);
  projectData["temp"] = data.temp;
- projectData["feel"] = data.feeling;
+ projectData["feeling"] = data.feeling;
  projectData["date"] = data.date;
  res.send(projectData);
 
