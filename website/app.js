@@ -81,7 +81,7 @@ const updateUI=async()=>{
            console.log(allData.temp);
            document.getElementById("temp").innerHTML=allData.temp;
           document.getElementById("date").innerHTML=allData.date;
-          document.getElementById("content").innerHTML=allData.feel;
+          document.getElementById("content").innerHTML=allData.feeling;
 
   } catch (e) {
   console.log( "updateui"+e );
